@@ -10,7 +10,7 @@ interface TrackerRepository {
         query:String,
         page:Int,
         pageSize:Int
-    ):Result<TrackableFood>
+    ):Result<List<TrackableFood>>
 
     suspend fun insertTrackedFood(food: TrackedFood)
     suspend fun deleteTrackedFood(food: TrackedFood)
