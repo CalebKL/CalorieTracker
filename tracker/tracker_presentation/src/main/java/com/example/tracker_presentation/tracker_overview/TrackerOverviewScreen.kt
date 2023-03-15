@@ -17,22 +17,21 @@ import com.example.tracker_presentation.tracker_overview.components.*
 @Composable
 fun TrackerOverviewScreen(
     onNavigateToSearch: (String, Int, Int, Int) -> Unit,
-    viewModel: TrackerOverviewViewModel = hiltViewModel(),
+    viewModel: TrackerOverviewViewModel = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     val context = LocalContext.current
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .padding(bottom = spacing.spaceMedium)
-    ){
+    ) {
         item {
             NutrientsHeader(state = state)
-            Spacer(modifier =Modifier.height(spacing.spaceMedium))
+            Spacer(modifier = Modifier.height(spacing.spaceMedium))
             DaySelector(
-                date =state.date,
+                date = state.date,
                 onPreviousDayClick = {
                     viewModel.onEvent(TrackerOverviewEvent.OnPreviousDayClick)
                 },
@@ -43,23 +42,30 @@ fun TrackerOverviewScreen(
                     .fillMaxWidth()
                     .padding(horizontal = spacing.spaceMedium)
             )
-            Spacer(modifier =Modifier.height(spacing.spaceMedium))
+            Spacer(modifier = Modifier.height(spacing.spaceMedium))
         }
-        items(state.meals){meal->
+        items(state.meals) { meal ->
             ExpandableMeal(
                 meal = meal,
+                onToggleClick = {
+                    viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(meal))
+                },
                 content = {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = spacing.spaceSmall)
-                    ){
-                        state.trackedFoods.forEach{food->
+                    ) {
+                        val foods = state.trackedFoods.filter {
+                            it.mealType == meal.mealType
+                        }
+                        foods.forEach { food ->
                             TrackedFoodItem(
                                 trackedFood = food,
                                 onDeleteClicked = {
                                     viewModel.onEvent(
-                                        TrackerOverviewEvent.OnDeleteTrackedFoodClick(food)
+                                        TrackerOverviewEvent
+                                            .OnDeleteTrackedFoodClick(food)
                                     )
                                 }
                             )
@@ -71,19 +77,16 @@ fun TrackerOverviewScreen(
                                 meal.name.asString(context)
                             ),
                             onClick = {
-                                      onNavigateToSearch(
-                                          meal.name.asString(context),
-                                          state.date.dayOfMonth,
-                                          state.date.monthValue,
-                                          state.date.year
-                                      )
+                                onNavigateToSearch(
+                                    meal.name.asString(context),
+                                    state.date.dayOfMonth,
+                                    state.date.monthValue,
+                                    state.date.year
+                                )
                             },
                             modifier = Modifier.fillMaxWidth()
                         )
                     }
-                },
-                onToggleClick = {
-                    viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(meal))
                 },
                 modifier = Modifier.fillMaxWidth()
             )
