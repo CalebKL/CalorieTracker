@@ -5,15 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.calorietracker.navigation.navigate
+import androidx.navigation.navArgument
 import com.example.calorietracker.ui.theme.CalorieTrackerTheme
-import com.example.core.navigation.Route
+import com.example.core.domain.preferences.Preferences
+import com.example.calorietracker.navigation.Route
 import com.example.onboarding_presentation.activity.ActivityScreen
 import com.example.onboarding_presentation.age.AgeScreen
 import com.example.onboarding_presentation.gender.GenderScreen
@@ -22,12 +22,19 @@ import com.example.onboarding_presentation.height.HeightScreen
 import com.example.onboarding_presentation.nutrient_goal.NutrientGoalScreen
 import com.example.onboarding_presentation.weight.WeightScreen
 import com.example.onboarding_presentation.welcome.WelcomeScreen
+import com.example.tracker_presentation.search.SearchScreen
+import com.example.tracker_presentation.tracker_overview.TrackerOverviewScreen
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var preferences: Preferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val shouldShowOnBoarding = preferences.loadShouldShowOnboarding()
         setContent {
             CalorieTrackerTheme {
                 val navController = rememberNavController()
@@ -39,49 +46,102 @@ class MainActivity : ComponentActivity() {
                     val unUsedPadding = it
                     NavHost(
                         navController = navController,
-                        startDestination =Route.WELCOME
+                        startDestination =if (shouldShowOnBoarding) {
+                            Route.WELCOME
+                        }else Route.TRACKER_OVERVIEW
                     ){
                         composable(Route.WELCOME){
-                            WelcomeScreen(onNavigate = navController::navigate)
+                            WelcomeScreen(onNextClick = {
+                                navController.navigate(Route.GENDER)
+                            }
+                            )
                         }
                         composable(Route.AGE){
                             AgeScreen(
-                                onNavigate = navController::navigate,
+                                onNextClick = {
+                                    navController.navigate(Route.HEIGHT)
+                                },
                                 scaffoldState = scaffoldState
                             )
                         }
                         composable(Route.GENDER){
-                            GenderScreen(onNavigate = navController::navigate)
+                            GenderScreen(onNextClick ={
+                                navController.navigate(Route.AGE)
+                            })
                         }
                         composable(Route.HEIGHT){
                             HeightScreen(
-                                onNavigate = navController::navigate,
+                                onNextClick = {
+                                    navController.navigate(Route.WEIGHT)
+                                },
                                 scaffoldState = scaffoldState
                             )
                         }
                         composable(Route.WEIGHT){
                             WeightScreen(
-                                onNavigate = navController::navigate,
+                                onNextClick = {
+                                    navController.navigate(Route.ACTIVITY)
+                                },
                                 scaffoldState = scaffoldState
                             )
                         }
                         composable(Route.NUTRIENT_GOAL){
                             NutrientGoalScreen(
-                                onNavigate = navController::navigate,
+                                onNextClick = {
+                                    navController.navigate(Route.TRACKER_OVERVIEW)
+                                },
                                 scaffoldState = scaffoldState
                             )
                         }
                         composable(Route.ACTIVITY){
-                            ActivityScreen(onNavigate = navController::navigate)
+                            ActivityScreen(onNextClick = {
+                                navController.navigate(Route.GOAL)
+                            })
                         }
                         composable(Route.GOAL){
-                            GoalScreen(onNavigate = navController::navigate)
+                            GoalScreen(onNextClick = {
+                                navController.navigate(Route.NUTRIENT_GOAL)
+                            })
                         }
                         composable(Route.TRACKER_OVERVIEW){
-
+                            TrackerOverviewScreen(onNavigateToSearch = {mealName, day, month, year ->
+                                navController.navigate(
+                                    Route.SEARCH + "/$mealName" + "/$day" + "/$month" + "/$year"
+                                )
+                            })
                         }
-                        composable(Route.SEARCH){
+                        composable(
+                           route=  Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",
+                            arguments = listOf(
+                                navArgument("mealName"){
+                                    type = NavType.StringType
+                                },
+                                navArgument("dayOfMonth"){
+                                    type = NavType.IntType
+                                },
+                                navArgument("month"){
+                                    type = NavType.IntType
+                                },
+                                navArgument("year"){
+                                    type = NavType.IntType
+                                },
+                            )
+                        ){navBackStackEntry->
+                            val mealName = navBackStackEntry.arguments?.getString("mealName")!!
+                            val dayOfMonth = navBackStackEntry.arguments?.getInt("dayOfMonth")!!
+                            val month = navBackStackEntry.arguments?.getInt("month")!!
+                            val year = navBackStackEntry.arguments?.getInt("year")!!
 
+                            SearchScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigateUp = {
+                                    navController.navigateUp()
+                                },
+                                mealName =mealName ,
+                                dayOfMonth = dayOfMonth,
+                                month = month,
+                                year = year
+                            )
                         }
                     }
                 }

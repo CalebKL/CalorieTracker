@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.example.core.R
-import com.example.core.navigation.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 @HiltViewModel
@@ -45,7 +44,7 @@ class AgeViewModel @Inject constructor(
                 return@launch
             }
             preferences.saveAge(ageNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.HEIGHT))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }
