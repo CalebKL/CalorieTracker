@@ -75,6 +75,7 @@ dependencies {
     implementation(Coil.coilCompose)
 
     implementation(Google.material)
+    implementation(Timber.timber)
 
     implementation(Retrofit.okHttp)
     implementation(Retrofit.retrofit)

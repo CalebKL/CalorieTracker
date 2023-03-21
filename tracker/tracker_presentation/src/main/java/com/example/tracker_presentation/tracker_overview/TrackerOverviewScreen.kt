@@ -13,6 +13,7 @@ import com.example.core.util.UiEvent
 import com.example.core_ui.LocalSpacing
 import com.example.core.R
 import com.example.tracker_presentation.tracker_overview.components.*
+import timber.log.Timber
 
 @Composable
 fun TrackerOverviewScreen(
@@ -59,6 +60,7 @@ fun TrackerOverviewScreen(
                         val foods = state.trackedFoods.filter {
                             it.mealType == meal.mealType
                         }
+                        Timber.e("tracked Foods List ${state.trackedFoods}")
                         foods.forEach { food ->
                             TrackedFoodItem(
                                 trackedFood = food,
