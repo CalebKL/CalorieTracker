@@ -15,7 +15,7 @@ android {
         versionCode = ProjectConfig.versionCode
         versionName = ProjectConfig.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.calorietracker.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -61,6 +61,7 @@ dependencies {
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)
 
+    implementation(project(Modules.coreUi))
     implementation(project(Modules.core))
     implementation(project(Modules.onboardingPresentation))
     implementation(project(Modules.onboardingDomain))
@@ -74,6 +75,7 @@ dependencies {
     implementation(Coil.coilCompose)
 
     implementation(Google.material)
+    implementation(Timber.timber)
 
     implementation(Retrofit.okHttp)
     implementation(Retrofit.retrofit)
