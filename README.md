@@ -3,7 +3,7 @@
   <td>
 
 ## CalorieTracker
-<p align="left"> A Mobile Application that helps users track their calories
+<p align="left"> A Mobile Application that helps users track their calories with their tracker goals
 </p>
 
 ## Description
@@ -22,7 +22,7 @@ This is a mobile application that lets users track their calories when they take
 </td> 
 <td>
 
-https://user-images.githubusercontent.com/95022986/221592272-71f774ea-a2c7-442d-93d3-e6f3ca82a3b8.mp4
+https://user-images.githubusercontent.com/95022986/229217486-82037957-7d52-4eef-b962-2f8bc9dc83e4.mp4
 </td>
 </tr>
 </table>
@@ -30,30 +30,11 @@ https://user-images.githubusercontent.com/95022986/221592272-71f774ea-a2c7-442d-
 ## Setup Requirements
 Clone the repository, setup the your tracker goals and add any meal to check the amount of calories consumed.
 
-
-## 🌚 Screenshots(Dark)
-|   Splash Screen    |  Signing Up   |   Authentication Screen   |  Home Screen |
-|---	|---	|---    |---   
-|![splash](https://user-images.githubusercontent.com/95022986/221582385-5bd13939-3d69-4593-8700-e141eae471e6.jpg)| ![Sign up](https://user-images.githubusercontent.com/95022986/221583194-015f17d0-4d42-476d-9f10-e721bcaf8d17.jpg)| ![Authentication](https://user-images.githubusercontent.com/95022986/221583803-688a93a3-dfa0-45b0-b138-36be4e73f993.jpg)| ![Home](https://user-images.githubusercontent.com/95022986/221584374-614f82b5-45b3-487e-a6e1-7d20c25bc6ef.jpg)
-
-
-|    Empty Screen    |  Write Screen    |   Calender Selection   |  Time Selection |
-|---	|---	|---    |---  
-| ![Empty](https://user-images.githubusercontent.com/95022986/221584941-4cf6cdd8-6da1-49f7-99de-c998387fc8d9.jpg)| ![Write](https://user-images.githubusercontent.com/95022986/221585310-e7b3a90f-7d13-487c-9fbf-e48588933b30.jpg) | ![Calender](https://user-images.githubusercontent.com/95022986/221586003-f40b029f-4f39-4d19-a171-575703a3014b.jpg) | ![Time ](https://user-images.githubusercontent.com/95022986/221586183-7f402ef6-be1f-4ec5-aa93-ab3563d316d4.jpg)
-
 ## 🌚 Screenshots(Light)
-|   Splash Screen    |  Signing Up   |   Authentication Screen   |  Home Screen |
-|---	|---	|---    |---   
-|![Splash](https://user-images.githubusercontent.com/95022986/221587621-ab02766f-5f09-4412-b2d0-5e662914c41a.jpg)| ![Signup](https://user-images.githubusercontent.com/95022986/221587902-d43907fe-5e2c-412c-a90a-12d05c8afe25.jpg) | ![Authentication](https://user-images.githubusercontent.com/95022986/221588146-4f447993-d4ab-43cc-bf90-d3b0201146ed.jpg)| ![Home](https://user-images.githubusercontent.com/95022986/221588292-c499240b-72f2-43c7-be93-cee6ed2c9980.jpg)
+|   Home Screen    |  Search Screen   |   Searched Food Item   | 
+|---	|---	|---   
+| ![home](https://user-images.githubusercontent.com/95022986/229216725-a37e70d6-eb8b-46b6-accd-135adf322352.jpg)| ![search](https://user-images.githubusercontent.com/95022986/229216998-cc28f3b7-c9e4-486a-98a4-c360b3a71ebb.jpg)| ![foodItem](https://user-images.githubusercontent.com/95022986/229217142-278139c4-3699-4d3a-bdf3-31ce3ab44b79.jpg)
 
-
-
-|    Empty Screen    |  Write Screen    |   Calender Selection   |  Time Selection |
-|---	|---	|---    |---  
-| ![Empty](https://user-images.githubusercontent.com/95022986/221588570-c0ae645d-b933-43e4-9167-621299bf1bd6.jpg) |![Write](https://user-images.githubusercontent.com/95022986/221588803-dcf18f2d-8b5c-41a9-b8f2-da7e3e29249c.jpg) |![Calender](https://user-images.githubusercontent.com/95022986/221588956-139c084c-6f01-457c-a207-a56d39aa7920.jpg) | ![Time](https://user-images.githubusercontent.com/95022986/221589107-0b701d20-d11c-48f5-8e19-7984f84b2a53.jpg)
-
-
-|
 
 ## 🛠 Built With
 
